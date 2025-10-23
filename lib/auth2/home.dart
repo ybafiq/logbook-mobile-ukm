@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:flutter_training/auth2/login.dart';
 import 'package:flutter_training/auth2/home.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage2 extends StatelessWidget {
   final String username;
@@ -16,6 +17,43 @@ class HomePage2 extends StatelessWidget {
       MaterialPageRoute(
         builder: (_) =>
             LoginPage2(prefilledEmail: email, prefilledName: username),
+      ),
+    );
+  }
+
+  Future<void> _confirmDeleteAccount(BuildContext context) async {
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Confirm Account Deletion'),
+        content: const Text(
+          'Are you sure you want to delete your account? This action cannot be undone.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+            child: const Text('Delete'),
+          ),
+        ],
+      ),
+    );
+
+    if (ok != true) return;
+
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+    // Implement account deletion logic here
+
+    // After deletion, navigate back to login
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (_) => LoginPage2(prefilledEmail: null, prefilledName: null),
       ),
     );
   }
@@ -78,6 +116,41 @@ class HomePage2 extends StatelessWidget {
 
             const SizedBox(height: 10),
 
+            ElevatedButton(
+              onPressed: () => _confirmDeleteAccount(context),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFFBE1E2D), // UKM Red
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 14,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                elevation: 3,
+              ),
+              child: const Text(
+                'Delete Account',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 0.5,
+                ),
+              ),
+            ),
+
+            // TextButton(
+            //   onPressed: () => _confirmDeleteAccount(context),
+            //   child: const Text(
+            //     'Delete Account',
+            //     style: TextStyle(
+            //       color: Colors.red,
+            //       decoration: TextDecoration.underline,
+            //     ),
+            //   ),
+            // ),
+
             // 📧 Email (optional)
             // if (email != null)
             //   Text(
@@ -87,7 +160,6 @@ class HomePage2 extends StatelessWidget {
             //       color: ukmYellow, // UKM yellow for secondary text
             //     ),
             //   ),
-
             const SizedBox(height: 50),
           ],
         ),
