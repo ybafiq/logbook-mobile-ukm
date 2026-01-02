@@ -30,6 +30,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  
+  
 
   
 
@@ -39,6 +41,14 @@ dependencies:
   lottie: ^3.3.2
   shared_preferences: ^2.5.3
   cupertino_icons: ^1.0.8
+  http: ^1.2.0
+  sqflite: ^2.3.0
+  path_provider: ^2.1.1
+  pdf: ^3.10.0
+  printing: ^5.12.0
+  image_picker: ^1.1.1
+  table_calendar: ^3.2.0
+  uuid: ^4.4.0
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +79,7 @@ flutter:
     - lib/assets/ukm.png
     - lib/assets/leaf.svg
     - lib/assets/rainbow.json
+    - lib/assets/profile.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

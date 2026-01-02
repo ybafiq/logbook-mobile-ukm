@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_training/auth2/login.dart';
+import 'package:flutter_training/auth2/login_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
@@ -30,22 +30,22 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     final savedEmail = prefs.getString('email');
 
     if (savedEmail == null || savedEmail != _email.text.trim().toLowerCase()) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Email not found!')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Email not found!')));
       return;
     }
 
     await prefs.setString('password', _newPass.text.trim());
 
     if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Password reset successful!')),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Password reset successful!')));
 
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (_) => const LoginPage2()),
+      MaterialPageRoute(builder: (_) => LoginPage2()),
       (Route<dynamic> route) => false,
     );
   }
@@ -69,7 +69,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         elevation: 2,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-      body: SingleChildScrollView( // ✅ FIX: allows vertical scroll to prevent overflow
+      body: SingleChildScrollView(
+        // ✅ FIX: allows vertical scroll to prevent overflow
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _form,
@@ -77,11 +78,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             children: [
               const SizedBox(height: 40),
 
-              Image.asset(
-                'lib/assets/ukm.png',
-                height: 100,
-                width: 100,
-              ),
+              Image.asset('lib/assets/ukm.png', height: 100, width: 100),
               const SizedBox(height: 20),
 
               const Text(

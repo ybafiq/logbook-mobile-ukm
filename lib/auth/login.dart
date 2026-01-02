@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_training/auth/home.dart';
 import 'package:flutter_training/auth/register.dart';
-import 'package:flutter_training/profile.dart';
+import 'package:flutter_training/testing/profile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   final String? prefilledEmail;
@@ -35,8 +36,17 @@ class LoadingScreenState extends State<LoginPage> {
   Future<void> _submit() async {
     if (!_form.currentState!.validate()) return;
 
-    // ignore: unused_local_variable
     final name = widget.prefilledName ?? 'User';
+
+    // ✅ Save user info to SharedPreferences
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('username', name);
+    await prefs.setString('email', _email.text);
+
+    // 🔑 Assign a simple mock user ID (for example, based on email)
+    // In a real app, this should come from your auth or database system
+    final generatedUserId = _email.text.hashCode.toString();
+    await prefs.setString('userId', generatedUserId);
 
     Navigator.pushReplacement(
       context,
@@ -44,7 +54,6 @@ class LoadingScreenState extends State<LoginPage> {
         builder: (_) => HomePage(username: name, email: _email.text),
       ),
     );
-    // Implement your login logic here
   }
 
   @override
@@ -75,7 +84,6 @@ class LoadingScreenState extends State<LoginPage> {
               width: 180,
               fit: BoxFit.contain,
             ),
-
             Form(
               key: _form,
               child: Column(
@@ -92,9 +100,7 @@ class LoadingScreenState extends State<LoginPage> {
                         ? 'Enter a valid email'
                         : null,
                   ),
-
                   const SizedBox(height: 20),
-
                   TextFormField(
                     controller: _password,
                     decoration: const InputDecoration(
@@ -106,9 +112,7 @@ class LoadingScreenState extends State<LoginPage> {
                     validator: (v) =>
                         (v == null || v.trim().isEmpty) ? 'password' : null,
                   ),
-
                   const SizedBox(height: 20),
-
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -120,9 +124,6 @@ class LoadingScreenState extends State<LoginPage> {
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         elevation: 2,
                       ),
-                      // onPressed: (){
-                      //   Navigator.push(context, MaterialPageRoute(builder: (_) => HomePage(username: '$_username', email: '',)));
-                      // },
                       onPressed: _submit,
                       child: const Text(
                         "Login",

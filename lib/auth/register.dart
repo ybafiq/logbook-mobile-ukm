@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_training/auth/login.dart';
+import 'package:shared_preferences/shared_preferences.dart'; // ✅ Added
 
 class RegSkeleton extends StatefulWidget {
   const RegSkeleton({super.key});
@@ -25,18 +26,27 @@ class _RegisterPage2State extends State<RegSkeleton> {
   Future<void> _submit() async {
     if (!_form.currentState!.validate()) return;
 
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text('Registration Successful!')));
-
     final username = _username.text;
     final email = _email.text;
 
+    // ✅ Save user data locally
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('username', username);
+    await prefs.setString('email', email);
+
+    // 🔑 Generate a unique user ID (based on email)
+    final userId = email.hashCode.toString();
+    await prefs.setString('userId', userId);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Registration Successful!')),
+    );
+
+    // ✅ Navigate to login with prefilled info
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (_) =>
-            LoginPage(prefilledEmail: email, prefilledName: username),
+        builder: (_) => LoginPage(prefilledEmail: email, prefilledName: username),
       ),
     );
   }

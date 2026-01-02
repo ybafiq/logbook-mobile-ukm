@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_training/auth/login.dart';
-import 'package:flutter_training/auth2/login.dart';
+import 'package:flutter_training/auth2/login_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart'; // ✅ Add this to generate unique user IDs
 
 class RegSkeleton2 extends StatefulWidget {
   const RegSkeleton2({super.key});
@@ -13,6 +13,8 @@ class RegSkeleton2 extends StatefulWidget {
 class _RegisterPage2State2 extends State<RegSkeleton2> {
   final _form = GlobalKey<FormState>();
   final _username = TextEditingController();
+  final _matricno = TextEditingController();
+  final _workplace = TextEditingController();
   final _email = TextEditingController();
   final _password = TextEditingController();
   bool _hidePass = true;
@@ -30,38 +32,40 @@ class _RegisterPage2State2 extends State<RegSkeleton2> {
     final prefs = await SharedPreferences.getInstance();
 
     final savedEmail = prefs.getString('email');
-    if (savedEmail ==_email.text.trim()) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('Email already registered!')));
+    if (savedEmail == _email.text.trim()) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Email already registered!')),
+      );
       return;
     }
 
+    // ✅ Generate unique user ID and save
+    final String userId = const Uuid().v4();
+    await prefs.setString('userId', userId);
+
+    // ✅ Save registration details
     await prefs.setString('email', _email.text.trim());
     await prefs.setString('username', _username.text.trim());
+    await prefs.setString('matricno', _matricno.text.trim());
+    await prefs.setString('workplace', _workplace.text.trim());
     await prefs.setString('password', _password.text.trim());
 
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text('Registration Successful!')));
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Registration Successful!')),
+    );
 
-    final username = _username.text;
-    final email = _email.text;
-
+    // Navigate to login page
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (_) =>
-            LoginPage2(prefilledEmail: email, prefilledName: username),
+        builder: (_) => const LoginPage2(),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    // 🎨 UKM theme colors
     const Color ukmRed = Color(0xFFBE1E2D);
-    const Color ukmYellow = Color(0xFFF7B500);
     const Color ukmBlue = Color(0xFF005DAA);
 
     return Scaffold(
@@ -76,7 +80,7 @@ class _RegisterPage2State2 extends State<RegSkeleton2> {
           ),
         ),
         centerTitle: false,
-        backgroundColor: ukmRed, // UKM red
+        backgroundColor: ukmRed,
         elevation: 2,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
@@ -90,7 +94,6 @@ class _RegisterPage2State2 extends State<RegSkeleton2> {
               children: [
                 const SizedBox(height: 40),
 
-                // UKM logo
                 Center(
                   child: Image.asset(
                     'lib/assets/ukm.png',
@@ -102,20 +105,19 @@ class _RegisterPage2State2 extends State<RegSkeleton2> {
 
                 const SizedBox(height: 30),
 
-                // Title
                 const Text(
                   "Create Your Account",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
-                    color: ukmBlue, // UKM blue accent
+                    color: ukmBlue,
                   ),
                 ),
 
                 const SizedBox(height: 30),
 
-                // Username Field
+                // Username
                 TextFormField(
                   controller: _username,
                   decoration: InputDecoration(
@@ -124,19 +126,17 @@ class _RegisterPage2State2 extends State<RegSkeleton2> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: ukmBlue),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: ukmBlue),
                     ),
                   ),
-                  validator: (value) => (value == null || value.isEmpty)
-                      ? 'Please enter your username'
-                      : null,
+                  validator: (value) =>
+                      (value == null || value.isEmpty) ? 'Please enter your username' : null,
                 ),
 
                 const SizedBox(height: 20),
 
-                // Email Field
+                // Email
                 TextFormField(
                   controller: _email,
                   decoration: InputDecoration(
@@ -145,19 +145,55 @@ class _RegisterPage2State2 extends State<RegSkeleton2> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: ukmBlue),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: ukmBlue),
                     ),
                   ),
-                  validator: (value) => (value == null || value.isEmpty)
-                      ? 'Please enter your email'
-                      : null,
+                  validator: (value) =>
+                      (value == null || value.isEmpty) ? 'Please enter your email' : null,
+                ),
+
+                const SizedBox(height: 30),
+
+                // Matric No
+                TextFormField(
+                  controller: _matricno,
+                  decoration: InputDecoration(
+                    labelText: 'Matric No',
+                    prefixIcon: const Icon(Icons.badge_outlined, color: ukmBlue),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: ukmBlue),
+                    ),
+                  ),
+                  validator: (value) =>
+                      (value == null || value.isEmpty) ? 'Please enter your matric number' : null,
+                ),
+
+                const SizedBox(height: 30),
+
+                // Workplace
+                TextFormField(
+                  controller: _workplace,
+                  decoration: InputDecoration(
+                    labelText: 'Workplace',
+                    prefixIcon: const Icon(Icons.work_outline, color: ukmBlue),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: ukmBlue),
+                    ),
+                  ),
+                  validator: (value) =>
+                      (value == null || value.isEmpty) ? 'Please enter your workplace' : null,
                 ),
 
                 const SizedBox(height: 20),
 
-                // Password Field
+                // Password
                 TextFormField(
                   controller: _password,
                   obscureText: _hidePass,
@@ -178,14 +214,12 @@ class _RegisterPage2State2 extends State<RegSkeleton2> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: ukmBlue),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: ukmBlue),
                     ),
                   ),
-                  validator: (value) => (value == null || value.isEmpty)
-                      ? 'Please enter your password'
-                      : null,
+                  validator: (value) =>
+                      (value == null || value.isEmpty) ? 'Please enter your password' : null,
                 ),
 
                 const SizedBox(height: 30),
@@ -217,7 +251,6 @@ class _RegisterPage2State2 extends State<RegSkeleton2> {
 
                 const SizedBox(height: 20),
 
-                // Already have account
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -246,7 +279,6 @@ class _RegisterPage2State2 extends State<RegSkeleton2> {
 
                 const SizedBox(height: 50),
 
-                // Footer
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   decoration: const BoxDecoration(

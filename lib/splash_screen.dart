@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:flutter_training/auth2/login.dart';
+import 'package:flutter_training/auth2/login_auth.dart';
 
 class LoadingScreenState2 extends StatefulWidget {
   const LoadingScreenState2({super.key});
@@ -13,7 +13,6 @@ class _LoadingScreenState2 extends State<LoadingScreenState2> {
   @override
   Widget build(BuildContext context) {
     const Color ukmRed = Color(0xFFBE1E2D);
-    const Color ukmYellow = Color(0xFFF7B500);
     const Color ukmBlue = Color(0xFF005DAA);
 
     return Scaffold(

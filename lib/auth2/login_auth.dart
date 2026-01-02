@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_training/auth2/forgot.dart';
-import 'package:flutter_training/auth2/home.dart';
-import 'package:flutter_training/auth2/register.dart';
+import 'package:flutter_training/auth2/forgot_auth.dart';
+import 'package:flutter_training/screen/home_screen.dart';
+import 'package:flutter_training/auth2/register_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart'; // <-- Add this for unique user IDs
 
 class LoginPage2 extends StatefulWidget {
   final String? prefilledEmail;
@@ -18,8 +19,6 @@ class LoadingScreenState2 extends State<LoginPage2> {
   final _form = GlobalKey<FormState>();
   final _email = TextEditingController();
   final _password = TextEditingController();
-  final _username = TextEditingController();
-  bool _loading = true;
 
   @override
   void initState() {
@@ -37,43 +36,50 @@ class LoadingScreenState2 extends State<LoginPage2> {
   Future<void> _submit2() async {
     if (!_form.currentState!.validate()) return;
 
-    final name = widget.prefilledName ?? 'User';
-
-    setState(() => _loading= true);
-
     final prefs = await SharedPreferences.getInstance();
     final savedEmail = prefs.getString('email');
     final savedPassword = prefs.getString('password');
     final savedUsername = prefs.getString('username');
+    String? savedUserId = prefs.getString('userId'); // <-- get stored user ID
 
     await Future.delayed(const Duration(seconds: 1));
 
-    if (_email.text.trim() == savedEmail && _password.text.trim() == savedPassword) {
+    if (_email.text.trim() == savedEmail &&
+        _password.text.trim() == savedPassword) {
+      if (savedUserId == null || savedUserId.isEmpty) {
+        savedUserId = const Uuid().v4(); // generate unique user ID
+        await prefs.setString('userId', savedUserId);
+      }
+
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(const SnackBar(content: Text('Login Successful!')));
-    }
-    else {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('Invalid email or password!')));
-      setState(() => _loading= false);
-      return;
-    }
 
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (_) => HomePage2(username: savedUsername.toString(), email: savedEmail.toString()),
-      ),
-    );
+      final usernameToUse =
+          savedUsername?.isNotEmpty == true ? savedUsername! : 'User';
+      final emailToUse =
+          savedEmail?.isNotEmpty == true ? savedEmail! : _email.text.trim();
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => HomePage2(
+            username: usernameToUse,
+            email: emailToUse,
+            userId: savedUserId!, // ✅ pass userId to HomePage2
+          ),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Invalid email or password!')),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    // UKM theme colors
     const Color ukmRed = Color(0xFFBE1E2D);
-    const Color ukmYellow = Color(0xFFF7B500);
     const Color ukmBlue = Color(0xFF005DAA);
 
     return Scaffold(
@@ -87,7 +93,7 @@ class LoadingScreenState2 extends State<LoginPage2> {
             letterSpacing: 2,
           ),
         ),
-        backgroundColor: ukmRed, // UKM red color
+        backgroundColor: ukmRed,
         elevation: 1,
         centerTitle: false,
         iconTheme: const IconThemeData(color: Colors.white),
@@ -103,7 +109,6 @@ class LoadingScreenState2 extends State<LoginPage2> {
               fit: BoxFit.contain,
             ),
             const SizedBox(height: 30),
-
             Form(
               key: _form,
               child: Column(
@@ -120,9 +125,7 @@ class LoadingScreenState2 extends State<LoginPage2> {
                         ? 'Enter a valid email'
                         : null,
                   ),
-
                   const SizedBox(height: 20),
-
                   TextFormField(
                     controller: _password,
                     decoration: const InputDecoration(
@@ -134,9 +137,7 @@ class LoadingScreenState2 extends State<LoginPage2> {
                     validator: (v) =>
                         (v == null || v.trim().isEmpty) ? 'password' : null,
                   ),
-
                   const SizedBox(height: 20),
-
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -161,12 +162,13 @@ class LoadingScreenState2 extends State<LoginPage2> {
                     ),
                   ),
                   const SizedBox(height: 8),
-                
                   TextButton(
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (_) => const ForgotPasswordPage()),
+                        MaterialPageRoute(
+                          builder: (_) => const ForgotPasswordPage(),
+                        ),
                       );
                     },
                     child: const Text(
@@ -178,7 +180,6 @@ class LoadingScreenState2 extends State<LoginPage2> {
                       ),
                     ),
                   ),
-
                   TextButton(
                     onPressed: () {
                       Navigator.push(
@@ -198,10 +199,7 @@ class LoadingScreenState2 extends State<LoginPage2> {
                 ],
               ),
             ),
-
             const SizedBox(height: 100),
-
-            // Footer section
             Container(
               padding: const EdgeInsets.symmetric(vertical: 20),
               decoration: const BoxDecoration(
