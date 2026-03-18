@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_training/models/logbookentry_models.dart';
+import 'package:logbook_ukm/models/logbookentry_models.dart';
 
 class ViewSingleEntryPage extends StatelessWidget {
   final LogbookEntry entry;
@@ -139,3 +139,4 @@ class ViewSingleEntryPage extends StatelessWidget {
     );
   }
 }
+

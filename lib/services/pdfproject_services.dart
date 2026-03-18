@@ -1,4 +1,4 @@
-import 'package:flutter_training/models/projectentry_models.dart';
+import 'package:logbook_ukm/models/projectentry_models.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
@@ -162,3 +162,4 @@ Future<void> generatePdf2(
 
   await Printing.sharePdf(bytes: await pdf.save(), filename: 'project_logbook.pdf');
 }
+

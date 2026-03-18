@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_training/models/projectentry_models.dart';
+import 'package:logbook_ukm/models/projectentry_models.dart';
 
 class ViewSingleProjectEntryPage extends StatelessWidget {
   final ProjectEntry entry;
@@ -164,3 +164,4 @@ class ViewSingleProjectEntryPage extends StatelessWidget {
     );
   }
 }
+

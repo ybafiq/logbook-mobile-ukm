@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_training/models/projectentry_models.dart';
-import 'package:flutter_training/screen/project/edit_projectentry_screen.dart';
-import 'package:flutter_training/screen/project/view_projectentry_screen.dart';
-import 'package:flutter_training/services/pdfproject_services.dart';
-import 'package:flutter_training/services/projectdatabase_services.dart';
+import 'package:logbook_ukm/models/projectentry_models.dart';
+import 'package:logbook_ukm/screen/project/edit_projectentry_screen.dart';
+import 'package:logbook_ukm/screen/project/view_projectentry_screen.dart';
+import 'package:logbook_ukm/services/pdfproject_services.dart';
+import 'package:logbook_ukm/services/projectdatabase_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ViewProjectEntriesPage extends StatefulWidget {
@@ -254,3 +254,4 @@ class _ViewProjectEntriesPageState extends State<ViewProjectEntriesPage> {
     );
   }
 }
+

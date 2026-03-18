@@ -1,4 +1,4 @@
-import 'package:flutter_training/models/projectentry_models.dart';
+import 'package:logbook_ukm/models/projectentry_models.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -75,3 +75,4 @@ class ProjectDatabaseHelper {
 }
 
 }
+

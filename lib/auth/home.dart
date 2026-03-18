@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_training/auth/login.dart';
+import 'package:logbook_ukm/auth/login.dart';
 import 'package:lottie/lottie.dart';
 
 class HomePage extends StatelessWidget {
@@ -70,4 +70,5 @@ class HomePage extends StatelessWidget {
     );
   }
 } 
+
 

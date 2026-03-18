@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_training/auth2/login_auth.dart';
+import 'package:logbook_ukm/auth2/login_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart'; // ✅ Add this to generate unique user IDs
 
@@ -311,3 +311,4 @@ class _RegisterPage2State2 extends State<RegSkeleton2> {
     );
   }
 }
+

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_training/screen/daily/dailyentry_screen.dart';
-import 'package:flutter_training/screen/home_screen.dart';
-import 'package:flutter_training/models/logbookentry_models.dart';
-import 'package:flutter_training/services/dailydatabase_services.dart';
+import 'package:logbook_ukm/screen/daily/dailyentry_screen.dart';
+import 'package:logbook_ukm/screen/home_screen.dart';
+import 'package:logbook_ukm/models/logbookentry_models.dart';
+import 'package:logbook_ukm/services/dailydatabase_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LogbookPage extends StatefulWidget {
@@ -408,3 +408,4 @@ class _LogbookPageState extends State<LogbookPage> {
     );
   }
 }
+

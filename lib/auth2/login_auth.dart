@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_training/auth2/forgot_auth.dart';
-import 'package:flutter_training/screen/home_screen.dart';
-import 'package:flutter_training/auth2/register_auth.dart';
+import 'package:logbook_ukm/auth2/forgot_auth.dart';
+import 'package:logbook_ukm/screen/home_screen.dart';
+import 'package:logbook_ukm/auth2/register_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -238,3 +238,4 @@ class LoadingScreenState2 extends State<LoginPage2> {
     );
   }
 }
+

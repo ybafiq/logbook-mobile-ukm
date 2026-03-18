@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_training/auth2/login_auth.dart';
+import 'package:logbook_ukm/auth2/login_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
@@ -181,3 +181,4 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     );
   }
 }
+

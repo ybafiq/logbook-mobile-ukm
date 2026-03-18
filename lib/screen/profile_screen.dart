@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_training/auth2/login_auth.dart';
+import 'package:logbook_ukm/auth2/login_auth.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -296,3 +296,4 @@ class _UserProfilePageState extends State<UserProfilePage> {
     );
   }
 }
+

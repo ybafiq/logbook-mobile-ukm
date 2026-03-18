@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_training/screen/home_screen.dart';
-import 'package:flutter_training/screen/project/projectentry_screen.dart';
-import 'package:flutter_training/models/projectentry_models.dart';
-import 'package:flutter_training/services/projectdatabase_services.dart';
+import 'package:logbook_ukm/screen/home_screen.dart';
+import 'package:logbook_ukm/screen/project/projectentry_screen.dart';
+import 'package:logbook_ukm/models/projectentry_models.dart';
+import 'package:logbook_ukm/services/projectdatabase_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProjectLogbookPage extends StatefulWidget {
@@ -441,3 +441,4 @@ class _ProjectLogbookPageState extends State<ProjectLogbookPage> {
     );
   }
 }
+

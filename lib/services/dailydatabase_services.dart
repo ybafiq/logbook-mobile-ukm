@@ -1,4 +1,4 @@
-import 'package:flutter_training/models/logbookentry_models.dart';
+import 'package:logbook_ukm/models/logbookentry_models.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart'; // ✅ Needed for join()
@@ -73,3 +73,4 @@ class LogbookDatabaseHelper {
   );
 }
 }
+

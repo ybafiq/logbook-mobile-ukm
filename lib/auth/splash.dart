@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_training/auth/login.dart';
+import 'package:logbook_ukm/auth/login.dart';
 
 class LoadingScreenState extends StatefulWidget {
   const LoadingScreenState({super.key});
@@ -27,4 +27,5 @@ class _LoadingScreenState extends State<LoadingScreenState> {
     return const Scaffold(body: Center (child: CircularProgressIndicator()));
   }
 }
+
 

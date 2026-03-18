@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:flutter_training/auth2/login_auth.dart';
+import 'package:logbook_ukm/auth2/login_auth.dart';
 
 class LoadingScreenState2 extends StatefulWidget {
   const LoadingScreenState2({super.key});
@@ -86,3 +86,4 @@ class _LoadingScreenState2 extends State<LoadingScreenState2> {
     );
   }
 }
+

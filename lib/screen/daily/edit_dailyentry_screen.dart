@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_training/models/logbookentry_models.dart';
-import 'package:flutter_training/services/dailydatabase_services.dart';
+import 'package:logbook_ukm/models/logbookentry_models.dart';
+import 'package:logbook_ukm/services/dailydatabase_services.dart';
 
 class EditEntryPage extends StatefulWidget {
   final LogbookEntry entry;
@@ -134,3 +134,4 @@ class _EditEntryPageState extends State<EditEntryPage> {
     );
   }
 }
+

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_training/models/logbookentry_models.dart';
-import 'package:flutter_training/screen/daily/edit_dailyentry_screen.dart';
-import 'package:flutter_training/screen/daily/view_dailyentry_screen.dart';
-import 'package:flutter_training/services/dailydatabase_services.dart';
-import 'package:flutter_training/services/pdfdaily_services.dart';
+import 'package:logbook_ukm/models/logbookentry_models.dart';
+import 'package:logbook_ukm/screen/daily/edit_dailyentry_screen.dart';
+import 'package:logbook_ukm/screen/daily/view_dailyentry_screen.dart';
+import 'package:logbook_ukm/services/dailydatabase_services.dart';
+import 'package:logbook_ukm/services/pdfdaily_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ViewEntriesPage extends StatefulWidget {
@@ -249,3 +249,4 @@ class _ViewEntriesPageState extends State<ViewEntriesPage> {
     );
   }
 }
+

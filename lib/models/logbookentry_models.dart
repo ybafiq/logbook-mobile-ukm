@@ -41,3 +41,4 @@ class LogbookEntry {
 
   get comment => null;
 }
+

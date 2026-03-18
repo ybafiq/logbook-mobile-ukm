@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_training/auth/login.dart';
+import 'package:logbook_ukm/auth/login.dart';
 import 'package:shared_preferences/shared_preferences.dart'; // ✅ Added
 
 class RegSkeleton extends StatefulWidget {
@@ -238,3 +238,4 @@ class _RegisterPage2State extends State<RegSkeleton> {
     );
   }
 }
+

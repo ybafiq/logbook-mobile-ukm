@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_training/models/projectentry_models.dart';
-import 'package:flutter_training/services/projectdatabase_services.dart';
+import 'package:logbook_ukm/models/projectentry_models.dart';
+import 'package:logbook_ukm/services/projectdatabase_services.dart';
 
 class EditProjectEntryPage extends StatefulWidget {
   final ProjectEntry entry;
@@ -127,3 +127,4 @@ class _EditProjectEntryPageState extends State<EditProjectEntryPage> {
     );
   }
 }
+

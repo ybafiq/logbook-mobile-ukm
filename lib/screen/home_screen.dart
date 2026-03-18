@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_training/screen/daily/daily_screen.dart';
-import 'package:flutter_training/auth2/login_auth.dart';
-import 'package:flutter_training/auth2/news.dart';
-import 'package:flutter_training/screen/project/project_screen.dart';
-import 'package:flutter_training/screen/profile_screen.dart';
+import 'package:logbook_ukm/screen/daily/daily_screen.dart';
+import 'package:logbook_ukm/auth2/login_auth.dart';
+import 'package:logbook_ukm/auth2/news.dart';
+import 'package:logbook_ukm/screen/project/project_screen.dart';
+import 'package:logbook_ukm/screen/profile_screen.dart';
 
 class HomePage2 extends StatefulWidget {
   final String username;
@@ -231,3 +231,4 @@ class _HomePage2State extends State<HomePage2>
     );
   }
 }
+
