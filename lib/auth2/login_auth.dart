@@ -3,7 +3,8 @@ import 'package:flutter_training/auth2/forgot_auth.dart';
 import 'package:flutter_training/screen/home_screen.dart';
 import 'package:flutter_training/auth2/register_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:uuid/uuid.dart'; // <-- Add this for unique user IDs
+import 'package:uuid/uuid.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class LoginPage2 extends StatefulWidget {
   final String? prefilledEmail;
@@ -19,11 +20,13 @@ class LoadingScreenState2 extends State<LoginPage2> {
   final _form = GlobalKey<FormState>();
   final _email = TextEditingController();
   final _password = TextEditingController();
+  String? _version;
 
   @override
   void initState() {
     super.initState();
     _email.text = widget.prefilledEmail ?? '';
+    _getVersion();
   }
 
   @override
@@ -31,6 +34,13 @@ class LoadingScreenState2 extends State<LoginPage2> {
     _email.dispose();
     _password.dispose();
     super.dispose();
+  }
+
+  Future<void> _getVersion() async {
+    final packageInfo = await PackageInfo.fromPlatform();
+    setState(() {
+      _version = '${packageInfo.version}+${packageInfo.buildNumber}';
+    });
   }
 
   Future<void> _submit2() async {
@@ -206,17 +216,17 @@ class LoadingScreenState2 extends State<LoginPage2> {
                 border: Border(top: BorderSide(color: Colors.grey, width: 0.3)),
               ),
               child: Column(
-                children: const [
-                  Text(
+                children: [
+                  const Text(
                     "Universiti Kebangsaan Malaysia",
                     style: TextStyle(
                       color: ukmRed,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Text(
-                    "© 2025 UKM Logbook System",
+                    "© 2025 UKM Logbook System ${_version ?? 'Loading...'}",
                     style: TextStyle(color: Colors.grey, fontSize: 12),
                   ),
                 ],

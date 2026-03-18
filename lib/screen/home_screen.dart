@@ -114,7 +114,8 @@ class _HomePage2State extends State<HomePage2>
 
             // 👋 Welcome Section
             Text(
-              "Welcome, ${widget.username}!",
+              "Welcome,\n${widget.username}!",
+              textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 26,
                 fontWeight: FontWeight.bold,
@@ -158,12 +159,14 @@ class _HomePage2State extends State<HomePage2>
                 ),
                 _buildHomeButton(
                   context,
-                  label: "News",
-                  icon: Icons.article,
-                  color: ukmYellow,
+                  label: "Project Logbook",
+                  icon: Icons.assignment,
+                  color: ukmBlue,
                   onTap: () => Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (_) => const PublicApi()),
+                    MaterialPageRoute(
+                      builder: (_) => const ProjectLogbookPage(),
+                    ),
                   ),
                 ),
               ],
