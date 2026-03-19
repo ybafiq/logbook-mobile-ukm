@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logbook_ukm/auth/home.dart';
 import 'package:logbook_ukm/auth/register.dart';
-import 'package:logbook_ukm/testing/profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
