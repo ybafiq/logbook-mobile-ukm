@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:logbook_ukm/auth/home.dart';
-import 'package:logbook_ukm/auth/register.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
@@ -47,12 +45,12 @@ class LoadingScreenState extends State<LoginPage> {
     final generatedUserId = _email.text.hashCode.toString();
     await prefs.setString('userId', generatedUserId);
 
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (_) => HomePage(username: name, email: _email.text),
-      ),
-    );
+    // Navigator.pushReplacement(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (_) => HomePage(username: name, email: _email.text),
+    //   ),
+    // );
   }
 
   @override
@@ -138,10 +136,10 @@ class LoadingScreenState extends State<LoginPage> {
                   const SizedBox(height: 8),
                   TextButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (_) => const RegSkeleton()),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(builder: (_) => const RegSkeleton()),
+                      // );
                     },
                     child: const Text(
                       "New User? Sign Up",
